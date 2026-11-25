@@ -1,0 +1,657 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Discover Nepal | Land of Himalayas</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Playfair+Display:wght@600;700;800&display=swap" rel="stylesheet">
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background: #080e12;
+    color: white;
+    overflow-x: hidden;
+}
+
+/* NAVBAR */
+
+nav {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    padding: 22px 8%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 1000;
+    background: rgba(0,0,0,0.35);
+    backdrop-filter: blur(12px);
+}
+
+.logo {
+    font-size: 26px;
+    font-weight: 800;
+    letter-spacing: 2px;
+}
+
+.logo span {
+    color: #e9a23b;
+}
+
+nav ul {
+    display: flex;
+    gap: 35px;
+    list-style: none;
+}
+
+nav ul a {
+    color: white;
+    text-decoration: none;
+    font-size: 13px;
+    transition: .3s;
+}
+
+nav ul a:hover {
+    color: #e9a23b;
+}
+
+.menu-btn {
+    display: none;
+    font-size: 25px;
+    cursor: pointer;
+}
+
+/* HERO */
+
+.hero {
+    height: 100vh;
+    min-height: 650px;
+    background:
+    linear-gradient(to bottom, rgba(0,0,0,.3), #080e12),
+    url('https://images.unsplash.com/photo-1544735716-392fe2489ffa?q=90&w=2000')
+    center/cover no-repeat;
+    display: flex;
+    align-items: center;
+    padding: 0 10%;
+    position: relative;
+}
+
+.hero-content {
+    max-width: 750px;
+    animation: slideUp 1.5s ease;
+}
+
+.hero small {
+    color: #e9a23b;
+    letter-spacing: 5px;
+    font-weight: 600;
+}
+
+.hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(55px, 8vw, 105px);
+    line-height: 1.1;
+    margin: 25px 0;
+}
+
+.hero h1 span {
+    color: #e9a23b;
+}
+
+.hero p {
+    max-width: 550px;
+    color: #ddd;
+    line-height: 1.9;
+    font-size: 15px;
+}
+
+.btn {
+    display: inline-block;
+    margin-top: 35px;
+    padding: 15px 35px;
+    background: #e9a23b;
+    color: #111;
+    text-decoration: none;
+    border-radius: 4px;
+    font-weight: 600;
+    transition: .4s;
+}
+
+.btn:hover {
+    background: white;
+    transform: translateY(-5px);
+}
+
+/* COMMON SECTION */
+
+section {
+    padding: 110px 9%;
+}
+
+.section-title {
+    text-align: center;
+    margin-bottom: 60px;
+}
+
+.section-title small {
+    color: #e9a23b;
+    letter-spacing: 4px;
+}
+
+.section-title h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 45px;
+    margin-top: 15px;
+}
+
+/* ABOUT */
+
+.about {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 70px;
+    align-items: center;
+}
+
+.about-img img {
+    width: 100%;
+    height: 480px;
+    object-fit: cover;
+    border-radius: 5px;
+    transition: .5s;
+}
+
+.about-img img:hover {
+    transform: scale(1.03);
+}
+
+.about-text h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 43px;
+    margin-bottom: 25px;
+}
+
+.about-text p {
+    color: #aaa;
+    line-height: 2;
+    margin-bottom: 20px;
+    font-size: 14px;
+}
+
+/* DESTINATIONS */
+
+.destinations {
+    background: #0c151a;
+}
+
+.destination-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 25px;
+}
+
+.card {
+    height: 390px;
+    position: relative;
+    overflow: hidden;
+    border-radius: 7px;
+    cursor: pointer;
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity .8s, transform .8s;
+}
+
+.card.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: .7s;
+}
+
+.card:hover img {
+    transform: scale(1.12);
+}
+
+.card::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(transparent, rgba(0,0,0,.9));
+}
+
+.card-info {
+    position: absolute;
+    bottom: 30px;
+    left: 25px;
+    z-index: 2;
+}
+
+.card-info h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 28px;
+}
+
+.card-info p {
+    color: #e9a23b;
+    font-size: 12px;
+    margin-top: 8px;
+    letter-spacing: 2px;
+}
+
+/* EXPERIENCE */
+
+.experience {
+    text-align: center;
+    background:
+    linear-gradient(rgba(0,0,0,.7), rgba(0,0,0,.8)),
+    url('https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?q=85&w=1800')
+    center/cover fixed;
+}
+
+.experience h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 48px;
+    margin: 20px 0;
+}
+
+.experience p {
+    max-width: 650px;
+    margin: auto;
+    color: #ddd;
+    line-height: 2;
+}
+
+/* GALLERY */
+
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+}
+
+.gallery-grid img {
+    width: 100%;
+    height: 270px;
+    object-fit: cover;
+    border-radius: 5px;
+    transition: .5s;
+    cursor: pointer;
+}
+
+.gallery-grid img:hover {
+    transform: scale(1.04);
+    filter: brightness(.7);
+}
+
+/* FOOTER */
+
+footer {
+    background: #05090c;
+    padding: 55px 10%;
+    text-align: center;
+}
+
+footer h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 35px;
+}
+
+footer span {
+    color: #e9a23b;
+}
+
+footer p {
+    color: #777;
+    margin-top: 20px;
+    font-size: 13px;
+}
+
+/* ANIMATIONS */
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(60px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* RESPONSIVE */
+
+@media(max-width: 900px) {
+
+    nav {
+        padding: 20px 6%;
+    }
+
+    nav ul {
+        display: none;
+        position: absolute;
+        top: 75px;
+        right: 0;
+        width: 100%;
+        background: #080e12;
+        flex-direction: column;
+        text-align: center;
+        padding: 30px;
+        gap: 25px;
+    }
+
+    nav ul.active {
+        display: flex;
+    }
+
+    .menu-btn {
+        display: block;
+    }
+
+    .about {
+        grid-template-columns: 1fr;
+    }
+
+    .destination-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .gallery-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media(max-width: 550px) {
+
+    .destination-grid,
+    .gallery-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .hero {
+        padding: 0 7%;
+    }
+
+    .section-title h2 {
+        font-size: 35px;
+    }
+
+    .experience h2 {
+        font-size: 35px;
+    }
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+
+<nav>
+    <div class="logo">NEPAL<span>.</span></div>
+
+    <ul id="navLinks">
+        <li><a href="#home">Home</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#destinations">Destinations</a></li>
+        <li><a href="#gallery">Gallery</a></li>
+    </ul>
+
+    <div class="menu-btn" onclick="toggleMenu()">☰</div>
+</nav>
+
+
+<!-- HERO -->
+
+<header class="hero" id="home">
+
+    <div class="hero-content">
+
+        <small>WELCOME TO THE LAND OF HIMALAYAS</small>
+
+        <h1>Discover<br><span>Nepal.</span></h1>
+
+        <p>
+            A land where the mountains touch the sky,
+            ancient cultures tell timeless stories,
+            and every journey becomes an unforgettable experience.
+        </p>
+
+        <a href="#destinations" class="btn">EXPLORE NEPAL →</a>
+
+    </div>
+
+</header>
+
+
+<!-- ABOUT -->
+
+<section id="about">
+
+    <div class="about">
+
+        <div class="about-img">
+            <img src="https://images.unsplash.com/photo-1533130061792-64b345e4a833?q=85&w=1000" alt="Nepal landscape">
+        </div>
+
+        <div class="about-text">
+
+            <small style="color:#e9a23b;letter-spacing:4px">
+                THE BEAUTY OF NEPAL
+            </small>
+
+            <h2>A Country Beyond Imagination.</h2>
+
+            <p>
+                Nepal is a beautiful country nestled in the heart
+                of the Himalayas. Known for its breathtaking
+                mountains, rich traditions, peaceful temples
+                and welcoming people.
+            </p>
+
+            <p>
+                From the busy streets of Kathmandu to the peaceful
+                lakes of Pokhara, Nepal offers something special
+                for every traveler.
+            </p>
+
+            <a href="#gallery" class="btn">DISCOVER MORE</a>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- DESTINATIONS -->
+
+<section class="destinations" id="destinations">
+
+    <div class="section-title">
+
+        <small>EXPLORE THE COUNTRY</small>
+
+        <h2>Popular Destinations</h2>
+
+    </div>
+
+    <div class="destination-grid">
+
+        <div class="card">
+            <img src="https://images.unsplash.com/photo-1544735716-392fe2489ffa?q=85&w=800" alt="Kathmandu">
+            <div class="card-info">
+                <h3>Kathmandu</h3>
+                <p>CULTURE & HERITAGE</p>
+            </div>
+        </div>
+
+        <div class="card">
+            <img src="https://images.unsplash.com/photo-1605649487212-47bdab064df7?q=85&w=800" alt="Pokhara">
+            <div class="card-info">
+                <h3>Pokhara</h3>
+                <p>LAKES & MOUNTAINS</p>
+            </div>
+        </div>
+
+        <div class="card">
+            <img src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?q=85&w=800" alt="Everest">
+            <div class="card-info">
+                <h3>Everest</h3>
+                <p>THE ROOF OF THE WORLD</p>
+            </div>
+        </div>
+
+        <div class="card">
+            <img src="https://images.unsplash.com/photo-1518005020951-eccb494ad742?q=85&w=800" alt="Mustang">
+            <div class="card-info">
+                <h3>Mustang</h3>
+                <p>LAND OF MYSTERY</p>
+            </div>
+        </div>
+
+        <div class="card">
+            <img src="https://images.unsplash.com/photo-1516026672322-bc52d61a55d5?q=85&w=800" alt="Chitwan">
+            <div class="card-info">
+                <h3>Chitwan</h3>
+                <p>WILDLIFE & NATURE</p>
+            </div>
+        </div>
+
+        <div class="card">
+            <img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?q=85&w=800" alt="Himalayas">
+            <div class="card-info">
+                <h3>Annapurna</h3>
+                <p>ADVENTURE & TREKKING</p>
+            </div>
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- EXPERIENCE -->
+
+<section class="experience">
+
+    <small style="color:#e9a23b;letter-spacing:4px">
+        EXPERIENCE SOMETHING EXTRAORDINARY
+    </small>
+
+    <h2>Where Heaven Meets Earth.</h2>
+
+    <p>
+        Walk through ancient streets, witness the beauty
+        of the Himalayas, explore hidden valleys and discover
+        the magic of Nepal. Every corner has a story to tell.
+    </p>
+
+    <a href="#gallery" class="btn">EXPERIENCE NEPAL</a>
+
+</section>
+
+
+<!-- GALLERY -->
+
+<section id="gallery">
+
+    <div class="section-title">
+
+        <small>CAPTURED MOMENTS</small>
+
+        <h2>The Beauty of Nepal</h2>
+
+    </div>
+
+    <div class="gallery-grid">
+
+        <img src="https://images.unsplash.com/photo-1472396961693-142e6e269027?q=85&w=800" alt="Nature">
+
+        <img src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?q=85&w=800" alt="Mountains">
+
+        <img src="https://images.unsplash.com/photo-1500534623283-312aade485b7?q=85&w=800" alt="Landscape">
+
+        <img src="https://images.unsplash.com/photo-1470770841072-f978cf4d019e?q=85&w=800" alt="Lake">
+
+        <img src="https://images.unsplash.com/photo-1518837695005-2083093ee35b?q=85&w=800" alt="Nature">
+
+        <img src="https://images.unsplash.com/photo-1501785888041-af3ef285b470?q=85&w=800" alt="Mountain lake">
+
+    </div>
+
+</section>
+
+
+<!-- FOOTER -->
+
+<footer>
+
+    <h2>Discover <span>Nepal.</span></h2>
+
+    <p>Explore. Experience. Remember.</p>
+
+    <p>© 2026 Discover Nepal | Made with ❤️ in Nepal</p>
+
+</footer>
+
+
+<!-- JAVASCRIPT -->
+
+<script>
+
+// Mobile navigation
+
+function toggleMenu() {
+    document.getElementById("navLinks").classList.toggle("active");
+}
+
+// Close menu after clicking a link
+
+document.querySelectorAll("#navLinks a").forEach(link => {
+    link.addEventListener("click", () => {
+        document.getElementById("navLinks").classList.remove("active");
+    });
+});
+
+// Scroll reveal animation
+
+const cards = document.querySelectorAll(".card");
+
+const observer = new IntersectionObserver((entries) => {
+
+    entries.forEach(entry => {
+
+        if (entry.isIntersecting) {
+            entry.target.classList.add("show");
+        }
+
+    });
+
+}, {
+    threshold: 0.15
+});
+
+cards.forEach(card => {
+    observer.observe(card);
+});
+
+</script>
+
+</body>
+</html>
